@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">pruebaT2</string>
+    <string name="compay_label">Compania:</string>
+    <string name="age_label">age:</string>
+    <string name="email_label">Email:</string>
+    <string name="Heigh_label">Heigh:</string>
+    <string name="Weight_label">Weight:</string>
+</resources>
