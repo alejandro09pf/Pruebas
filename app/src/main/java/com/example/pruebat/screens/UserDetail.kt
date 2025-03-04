@@ -32,12 +32,24 @@ import com.example.pruebat.R
 import com.example.pruebat.Routes
 import com.example.pruebat.ui.components.Loader
 import com.example.taller1.data.User
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.material3.Button
+
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 
 @Composable
 fun UserDetail(user: User){
     val context = LocalContext.current
 
-    LazyColumn (modifier = Modifier.padding(16.dp)){
+    LazyColumn (modifier = Modifier
+        .padding(16.dp)
+        .fillMaxWidth()
+        ){
         if(user==null){
             item {
                 Loader(modifier = Modifier.fillParentMaxSize())
@@ -96,6 +108,18 @@ fun UserDetail(user: User){
                                     style = MaterialTheme.typography.bodyMedium,
                                 )
                                 Spacer(modifier = Modifier.height(4.dp))
+
+                                // Boton de llamada
+                                Button(onClick = {
+                                    val intent = Intent(Intent.ACTION_DIAL).apply {
+                                        data = Uri.parse("tel:${user.phone}")
+                                    }
+                                    context.startActivity(intent)
+                                }) {
+                                    Text(text = "Llamar a ${user.firstName}")
+                                }
+
+                                Spacer(modifier = Modifier.height(16.dp))
                             }
 
                         }
@@ -105,3 +129,4 @@ fun UserDetail(user: User){
         }
     }
 }
+

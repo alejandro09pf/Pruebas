@@ -47,6 +47,8 @@ import com.example.pruebat.ui.components.Loader
 import com.example.taller1.data.User
 import com.example.pruebat.viewModel.UserViewModel
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.encodeToString
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
