@@ -43,29 +43,29 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 
 @Composable
-fun UserDetail(user: User){
+fun UserDetail(user: User) {
     val context = LocalContext.current
 
-    LazyColumn (modifier = Modifier
+    LazyColumn(modifier = Modifier
         .padding(16.dp)
         .fillMaxWidth()
-        ){
-        if(user==null){
+    ) {
+        if (user == null) {
             item {
                 Loader(modifier = Modifier.fillParentMaxSize())
             }
-        }else{
+        } else {
             item {
                 Card(
                     modifier = Modifier
                         .fillParentMaxSize()
                         .padding(8.dp),
                 ) {
-                    Column (
+                    Column(
                         modifier = Modifier
                             .verticalScroll(rememberScrollState())
                             .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
-                    ){
+                    ) {
                         AsyncImage(
                             model = user!!.image,
                             contentDescription = "User picture",
@@ -83,18 +83,18 @@ fun UserDetail(user: User){
                             )
                         }
                         mapOf(
-                            stringResource(R.string.age_label)to user!!.age,
-                            stringResource(R.string.email_label)to user!!.email,
-                            stringResource(R.string.compay_label)to user!!.company,
-                            stringResource(R.string.Heigh_label)to user!!.height,
-                            stringResource(R.string.Weight_label)to user!!.weight
-                        ).forEach{entry ->
+                            stringResource(R.string.age_label) to user!!.age,
+                            stringResource(R.string.email_label) to user!!.email,
+                            stringResource(R.string.compay_label) to user!!.company,
+                            stringResource(R.string.Heigh_label) to user!!.height,
+                            stringResource(R.string.Weight_label) to user!!.weight
+                        ).forEach { entry ->
                             Row(
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(horizontal = 12.dp)
-                            ){
+                            ) {
                                 Text(
                                     entry.key,
                                     modifier = Modifier,
@@ -107,21 +107,23 @@ fun UserDetail(user: User){
                                     color = MaterialTheme.colorScheme.tertiary,
                                     style = MaterialTheme.typography.bodyMedium,
                                 )
-                                Spacer(modifier = Modifier.height(4.dp))
-
-                                // Boton de llamada
-                                Button(onClick = {
-                                    val intent = Intent(Intent.ACTION_DIAL).apply {
-                                        data = Uri.parse("tel:${user.phone}")
-                                    }
-                                    context.startActivity(intent)
-                                }) {
-                                    Text(text = "Llamar a ${user.firstName}")
-                                }
-
-                                Spacer(modifier = Modifier.height(16.dp))
                             }
+                            Spacer(modifier = Modifier.height(4.dp))
+                        }
 
+                        // Botón de llamada colocado al final de la columna
+                        Button(
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_DIAL).apply {
+                                    data = Uri.parse("tel:${user.phone}")
+                                }
+                                context.startActivity(intent)
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)
+                        ) {
+                            Text(text = "Llamar a ${user.firstName}")
                         }
                     }
                 }
