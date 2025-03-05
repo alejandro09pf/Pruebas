@@ -111,7 +111,7 @@ fun UserDetail(user: User) {
                             Spacer(modifier = Modifier.height(4.dp))
                         }
 
-                        // Botón de llamada colocado al final de la columna
+                        // Boton de llamada al final de la info del contacto
                         Button(
                             onClick = {
                                 val intent = Intent(Intent.ACTION_DIAL).apply {
